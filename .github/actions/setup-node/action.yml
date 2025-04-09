@@ -1,0 +1,20 @@
+name: Setup Frontend (Node.js)
+
+description: 'Configura el entorno de Node.js con una versión específica'
+inputs:
+    node-version:
+        description: 'Version de Node.js a usar'
+        required: true
+        type: string
+        default: '18' #Valor por defecto para el input node-version
+
+runs:
+    using: 'composite'                  #Conjunto de pasos
+    steps:
+        - name: Setup Node.js
+          uses: actions/setup-node@v3   #Configurar el entorno de Node.js
+          with:
+            node-version: ${{ inputs.node-version }} #Usa la versión de Node.js pasada como input
+
+
+            #El workflow frontend la usa para preparar el entorno antes de "Install dependencies"

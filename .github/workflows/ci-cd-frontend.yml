@@ -1,0 +1,43 @@
+name: Resuable Frontend CI/CD Workflow
+
+on:
+    workflow_call:                                          #Reutilizable. Se puede llamar mediante "uses"
+        inputs:
+            node-version:                                   #Variable version
+                description: 'Versión de Node.js a usar'
+                required: true
+                type: string
+            
+            deploy-target:                                  #Variable destino
+                description: 'Destino del despliegue (ej. prod-frontend1)'
+                required: true
+                type: string
+
+jobs:
+    build-and-deploy:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code                             #Clonar el repo
+              uses: actions/checkout@v2
+
+            - name: Setup Node.js                             #Instalar Node.js
+              uses: ./.github/actions/setup-node
+              with:
+                node-version: ${{ inputs.node-version }}
+            
+            - name: Install dependencies                      #Instalar dependencias
+              run: npm install
+            
+            - name: Build                                     #Compilar el proyecto
+              run: npm run build
+
+            - name: Run Test                                  #Ejecutar pruebas
+              run: npm test
+
+            - name: Deploy                                    #Despliegue
+              uses: ./.github/actions/deploy-app
+              with:
+                deploy-target: ${{ inputs.deploy-target }}
+
+
+                #Cualquier repo frontend (frontend-app1) llamará a este workflow y pasará sus propios valores para node-version y deploy-target.

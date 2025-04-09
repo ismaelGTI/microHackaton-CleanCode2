@@ -1,0 +1,41 @@
+name: Reusabe Backend CI/CD Workflow
+
+on:
+  workflow_call:                                         #Reutilizable. Se puede llamar mediante "uses"
+    inputs:
+      java-version:                                      #Variable version
+        description: 'Version de Java a usar'
+        required: true
+        type: string
+
+      deploy-target:                                     #Variable destino
+        description: 'Destino del despliegue (ej. prod-backend1)'
+        required: true
+        type: string
+
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code                               #Clonar el repo
+        uses: actions/checkout@v2
+      
+      - name: Setup Java                                   #Instalar Java (con Maven)
+        uses: ./.github/actions/setup-back
+        with:
+          java-version: ${{ inputs.java-version}}
+      
+      - name: Build                                        #Compilar el proyecto
+        run: mvn clean install                             #Comando maven para compilar proyecto Java
+
+      - name: Run Test                                     #Ejecutar pruebas
+        run: mvn test
+
+      - name: Deploy                                       #Despliegue
+        uses: ./.github/actions/deploy-app
+        with:
+          deploy-target: ${{ inputs.deploy-target }}
+
+        
+        #Cualquier repo backend (backend-app1) llamará a este workflow y pasará sus propios valores para java-version y deploy-target.

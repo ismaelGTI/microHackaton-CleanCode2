@@ -1,0 +1,19 @@
+name: Deploy Application
+
+description: 'Despliega la aplicación en el destino especificado'
+inputs:
+    deploy-target:
+        description: 'Destino de despliegue'
+        required: true
+        type: string
+        default: 'prod-backend1' #Valor por defecto para el input deploy-target
+
+runs:
+    using: 'composite'                  #Conjunto de pasos
+    steps:
+        - name: Deploy to ${{ inputs.deploy-target }}
+          run: |
+            echo "Desplegando en ${{ inputs.deploy-target }}"
+            ./deploy.sh ${{ inputs.deploy-target }} #Lógica de despliegue
+
+          shell: bash

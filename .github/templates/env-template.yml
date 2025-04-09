@@ -1,0 +1,10 @@
+#Aquí van todas las variables de referencia de Github Actions
+#para poder escogerlas de esta plantilla sin tener que cargarlas manualmente
+#en cada workflow
+
+
+env:
+  DEFAULT_REGION: 'us-east-1'
+  DEFAULT_ENV: 'production'
+  BUILD_TIMEOUT: '3600'
+  RETRY_ATTEMPTS: '3'
