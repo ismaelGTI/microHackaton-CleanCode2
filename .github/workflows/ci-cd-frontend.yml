@@ -17,16 +17,8 @@ jobs:
     build-and-deploy:
         runs-on: ubuntu-latest
         steps:
-            - name: Checkout microHackaton-CleanCode2
-              uses: actions/checkout@v3
-              with:
-                repository: ismaelGTI/microHackaton-CleanCode2
-                ref: main
-  
-            - name: Checkout consumer repo
-              uses: actions/checkout@v3
-              with:
-                path: ./consumer
+            - name: Checkout code                                                  #Clonar el repo
+              uses: actions/checkout@v2
 
             - name: Setup Node.js                                                       #Instalar Node.js
               uses: ismaelGTI/microHackaton-CleanCode2/.github/actions/setup-node@main  #Directorio de referencia para el workflow remoto
@@ -53,15 +45,5 @@ jobs:
               with:
                 deploy-target: ${{ inputs.deploy-target }}
 
-            - name: Print env
-              run: |
-                # Leer variables desde env-template.yml
-                DEFAULT_ENV=$(grep "DEFAULT_ENV" templates/env-template.yml | cut -d " " -f 2)
-                DEFAULT_REGION=$(grep "DEFAULT_REGION" templates/env-template.yml | cut -d " " -f 2)
-                # Exportarlas como variables de entorno
-                echo "DEFAULT_ENV=$DEFAULT_ENV" >> $GITHUB_ENV
-                echo "DEFAULT_REGION=$DEFAULT_REGION" >> $GITHUB_ENV
-
-                
-              
-              #Cualquier repo frontend (frontend-app1) llamará a este workflow y pasará sus propios valores para node-version y deploy-target.
+             
+                 #Cualquier repo frontend (frontend-app1) llamará a este workflow y pasará sus propios valores para node-version y deploy-target.
