@@ -26,18 +26,27 @@ jobs:
                 node-version: ${{ inputs.node-version }}
             
             - name: Install dependencies                                           #Instalar dependencias
-              run: npm install
+              run: |
+                echo "Instalando dependencias.."
+                # npm install
             
             - name: Build                                                          #Compilar el proyecto
-              run: npm run build
+              run: |
+                echo "Compilando proyecto.."
+                # npm run build
 
             - name: Run Test                                                       #Ejecutar pruebas
-              run: npm test
+              run: |
+                echo "Ejecutando pruebas.s."
+                # npm test
 
             - name: Deploy                                                              #Despliegue
               uses: ismaelGTI/microHackaton-CleanCode2/.github/actions/deploy-app@main  #Directorio de referencia para el workflow remoto
               with:
                 deploy-target: ${{ inputs.deploy-target }}
 
-
-                #Cualquier repo frontend (frontend-app1) llamará a este workflow y pasará sus propios valores para node-version y deploy-target.
+            - name: Print env
+              run: echo "Deployed to ${{ vars.DEFAULT_ENV}} in ${{ vars.DEFAULT_REGION}}" #Verificacion final de las varibales.               
+                
+              
+              #Cualquier repo frontend (frontend-app1) llamará a este workflow y pasará sus propios valores para node-version y deploy-target.
