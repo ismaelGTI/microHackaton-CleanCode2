@@ -14,6 +14,6 @@ runs:
         - name: Deploy to ${{ inputs.deploy-target }}
           run: |
             echo "Desplegando en ${{ inputs.deploy-target }}"
-            ismaelGTI/microHackaton-CleanCode2/deploy.sh ${{ inputs.deploy-target }} #Lógica de despliegue
+           ${{ github.action_path }}/deploy.sh ${{ inputs.deploy-target }} #Referencia de la ruta + Lógica de despliegue (deploy.sh) 
 
           shell: bash
