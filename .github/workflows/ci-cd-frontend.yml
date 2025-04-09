@@ -20,8 +20,8 @@ jobs:
             - name: Checkout code                                                  #Clonar el repo
               uses: actions/checkout@v2
 
-            - name: Setup Node.js                                                  #Instalar Node.js
-              uses: ismaelGTI/microHackaton-CleanCode2/.github/actions/setup-node  #Directorio de referencia para el workflow remoto
+            - name: Setup Node.js                                                       #Instalar Node.js
+              uses: ismaelGTI/microHackaton-CleanCode2/.github/actions/setup-node@main  #Directorio de referencia para el workflow remoto
               with:
                 node-version: ${{ inputs.node-version }}
             
@@ -34,8 +34,8 @@ jobs:
             - name: Run Test                                                       #Ejecutar pruebas
               run: npm test
 
-            - name: Deploy                                                         #Despliegue
-              uses: ismaelGTI/microHackaton-CleanCode2/.github/actions/deploy-app  #Directorio de referencia para el workflow remoto
+            - name: Deploy                                                              #Despliegue
+              uses: ismaelGTI/microHackaton-CleanCode2/.github/actions/deploy-app@main  #Directorio de referencia para el workflow remoto
               with:
                 deploy-target: ${{ inputs.deploy-target }}
 
