@@ -17,8 +17,16 @@ jobs:
     build-and-deploy:
         runs-on: ubuntu-latest
         steps:
-            - name: Checkout code                                                  #Clonar el repo
-              uses: actions/checkout@v2
+            - name: Checkout microHackaton-CleanCode2
+              uses: actions/checkout@v3
+              with:
+                repository: ismaelGTI/microHackaton-CleanCode2
+                ref: main
+  
+            - name: Checkout consumer repo
+              uses: actions/checkout@v3
+              with:
+                path: ./consumer
 
             - name: Setup Node.js                                                       #Instalar Node.js
               uses: ismaelGTI/microHackaton-CleanCode2/.github/actions/setup-node@main  #Directorio de referencia para el workflow remoto
