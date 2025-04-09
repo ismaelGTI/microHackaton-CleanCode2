@@ -10,13 +10,11 @@ inputs:
 runs:
     using: 'composite'         #Conjunto de pasoso
     steps: 
-        name: Setup Java
-        uses: actions/setup-java@v3  #Configurar el entorno de Java
-        with:
+        - name: Setup Java
+          uses: actions/setup-java@v3  #Configurar el entorno de Java
+          with:
             java-version: ${{ inputs.java-version }} #Usa la versión de Java pasada como input 
             distribution: 'temurin' #Distribución de Java
-            cache: 'maven' #Habilita caché para Maven
-            cache-dependency-path: '**/pom.xml' #Ruta de los archivos de dependencias de Maven
-            
+          
 
             #El workflow backend la usa para preparar el entorno antes de "Build"
