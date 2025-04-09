@@ -46,7 +46,14 @@ jobs:
                 deploy-target: ${{ inputs.deploy-target }}
 
             - name: Print env
-              run: echo "Deployed to ${{ vars.DEFAULT_ENV}} in ${{ vars.DEFAULT_REGION}}" #Verificacion final de las varibales.               
+              run: |
+                # Leer variables desde env-template.yml
+                DEFAULT_ENV=$(grep "DEFAULT_ENV" templates/env-template.yml | cut -d " " -f 2)
+                DEFAULT_REGION=$(grep "DEFAULT_REGION" templates/env-template.yml | cut -d " " -f 2)
+                # Exportarlas como variables de entorno
+                echo "DEFAULT_ENV=$DEFAULT_ENV" >> $GITHUB_ENV
+                echo "DEFAULT_REGION=$DEFAULT_REGION" >> $GITHUB_ENV
+
                 
               
               #Cualquier repo frontend (frontend-app1) llamará a este workflow y pasará sus propios valores para node-version y deploy-target.
