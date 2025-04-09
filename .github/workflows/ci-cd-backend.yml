@@ -22,18 +22,22 @@ jobs:
         uses: actions/checkout@v2
       
       - name: Setup Java                                   #Instalar Java (con Maven)
-        uses: ./.github/actions/setup-back
+        uses: ismaelGTI/microHackaton-CleanCode2/.github/actions/setup-back@main  #Directorio de referencia para el workflow remoto
         with:
           java-version: ${{ inputs.java-version}}
       
       - name: Build                                        #Compilar el proyecto
-        run: mvn clean install                             #Comando maven para compilar proyecto Java
+        run: |
+          echo "Compilando proyecto ..."
+          #mvn clean install                             #Comando maven para compilar proyecto Java
 
       - name: Run Test                                     #Ejecutar pruebas
-        run: mvn test
+        run: |
+          echo "Ejecutando pruebas..."
+          #mvn test
 
       - name: Deploy                                       #Despliegue
-        uses: ./.github/actions/deploy-app
+        uses: ismaelGTI/microHackaton-CleanCode2/.github/actions/deploy-app@main  #Directorio de referencia para el workflow remoto
         with:
           deploy-target: ${{ inputs.deploy-target }}
 

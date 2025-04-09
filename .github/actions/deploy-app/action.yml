@@ -6,7 +6,7 @@ inputs:
         description: 'Destino de despliegue'
         required: true
         type: string
-        default: 'prod-backend1' #Valor por defecto para el input deploy-target
+        default: 'def1' #Valor por defecto para el input deploy-target
 
 runs:
     using: 'composite'                  #Conjunto de pasos
