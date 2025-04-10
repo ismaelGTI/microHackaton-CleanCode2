@@ -17,6 +17,8 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    environment: default
+  
     steps:
       - name: Checkout code                               #Clonar el repo
         uses: actions/checkout@v2
