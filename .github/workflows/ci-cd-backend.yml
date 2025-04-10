@@ -41,5 +41,12 @@ jobs:
         with:
           deploy-target: ${{ inputs.deploy-target }}
 
+      - name: Success Message
+        run: |
+          if [ -z "${{ vars.DEFAULT_ENV }}" ] || [ -z "${{ vars.DEFAULT_REGION }}" ]; then
+            echo "¡Despliegue exitoso! Sigue adelante, el éxito está cerca."
+          else
+            echo "¡Despliegue exitoso a ${{ vars.DEFAULT_ENV }} en ${{ vars.DEFAULT_REGION }}! No te rindas, cada intento te acerca al triunfo."
+          fi
         
         #Cualquier repo backend (backend-app1) llamará a este workflow y pasará sus propios valores para java-version y deploy-target.
