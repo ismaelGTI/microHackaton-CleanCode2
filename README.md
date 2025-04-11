@@ -10,9 +10,10 @@ Bienvenidos al repositorio base para pipelines reutilizables de CI/CD. Este proy
   - `setup-node/`: Acción para configurar Node.js.
   - `setup-back/`: Acción para configurar back (Java/Maven).
   - `deploy-app/`: Acción común para despliegue.
+    - `deploy.sh`: Script simulado de despliegue. 
 - `templates/`:
   - `env-template.yml`: Plantilla de variables comunes (referencia para la UI de GitHub).
-- `deploy.sh`: Script simulado de despliegue.
+
 
 ## Variables globales
 Las siguientes variables están definidas en la UI de GitHub (Settings > Variables):
